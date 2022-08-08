@@ -1,17 +1,22 @@
-import {CookieSessionStorage, defineConfig} from '@shopify/hydrogen/config';
+import {defineConfig, CookieSessionStorage} from '@shopify/hydrogen/config';
 
 export default defineConfig({
-  shopify: {
+  shopify: () => ({
     defaultCountryCode: 'US',
     defaultLanguageCode: 'EN',
-    storeDomain: 'oxygenator.myshopify.com',
-    storefrontToken: '70faab4b482211c4167f94181a4ba4ed',
+    storeDomain:
+      // @ts-ignore
+      Oxygen?.env?.SHOPIFY_STORE_DOMAIN || 'neuroh-hardwood.myshopify.com',
+    storefrontToken:
+      // @ts-ignore
+      Oxygen?.env?.SHOPIFY_STOREFRONT_API_PUBLIC_TOKEN ||
+      '5e4d5defd9fdf9130909bef5ffe64fe5',
     storefrontApiVersion: '2022-07',
-  },
+  }),
   session: CookieSessionStorage('__session', {
     path: '/',
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: import.meta.env.PROD,
     sameSite: 'Strict',
     maxAge: 60 * 60 * 24 * 30,
   }),

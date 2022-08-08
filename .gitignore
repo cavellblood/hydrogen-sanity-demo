@@ -61,7 +61,7 @@ jspm_packages/
 
 # dotenv environment variables file
 .env
-.env.test
+.env.*
 
 # Serverless directories
 .serverless/

@@ -44,6 +44,8 @@ export default function ProductRoute() {
     query: QUERY_SANITY,
   });
 
+  console.log(sanityProduct);
+
   // Conditionally fetch Shopify document
   let storefrontProduct: ProductWithNodes | null = null;
   if (sanityProduct?.gid) {
